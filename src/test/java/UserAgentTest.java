@@ -15,17 +15,14 @@ public class UserAgentTest {
             "'Mozilla/5.0 (iPad; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', 'Mobile', 'No', 'iPhone'"
     })
 
-
     public void userAgentCheck(String userAgent,String responsePlatform, String responseBrowser, String responseDevice){
         JsonPath response = RestAssured
                 .given()
                 .header("User-Agent",userAgent)
                 .get("https://playground.learnqa.ru/ajax/api/user_agent_check")
                 .jsonPath();
-
         assertEquals(responsePlatform, response.get("platform"), "Error: unknown platform: " + response.get("platform"));
         assertEquals(responseBrowser, response.get("browser"), "Error: unknown browser: " + response.get("browser"));
         assertEquals(responseDevice, response.get("device"), "Error: unknown device: " + response.get("device"));
-
     }
 }
