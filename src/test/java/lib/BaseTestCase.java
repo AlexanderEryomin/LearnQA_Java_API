@@ -4,6 +4,7 @@ import io.restassured.http.Headers;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -23,5 +24,27 @@ public class BaseTestCase {
         JsonPath param = Response.jsonPath();
         assertTrue(param.getInt(paramName) > 0, "Doesn't have param with name: " + paramName);
         return param.getInt(paramName);
+    }
+    protected  String getEmptyParameter(String username, String firstName, String lastName, String email){
+        if ( username.equals("") ){
+            return  "'username'";
+        }else if ( firstName.equals("") ){
+            return "'firstName'";
+        }else if ( lastName.equals("") ){
+            return  "'lastName'";
+        }else if ( email.equals("") ){
+            return "'email'";
+        }
+        return "'password'";
+    }
+    protected Map<String,String> getUserData(String username, String firstName, String lastName, String email, String password){
+        Map<String, String> userData = new HashMap<>();
+        userData.put("username", username);
+        userData.put("firstName", firstName);
+        userData.put("lastName", lastName);
+        userData.put("email", email);
+        userData.put("password", password);
+
+        return  userData;
     }
 }
