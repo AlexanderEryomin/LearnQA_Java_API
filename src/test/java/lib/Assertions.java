@@ -1,9 +1,11 @@
 package lib;
 
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
 import static org.hamcrest.Matchers.hasKey;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class Assertions {
     public static void assertJasonByName(Response response, String name, int expectedValue){
@@ -16,6 +18,10 @@ public class Assertions {
     }
     public static void assertResponseWithKey(Response response, String expectedKey){
         response.then().assertThat().body("$",hasKey(expectedKey));
+    }
+    public static void assertResponseWithOutKey(Response response, String expectedKey){
+        JsonPath userData = response.jsonPath();
+        assertEquals(null,userData.getString(expectedKey));
     }
     public static void assertResponseErrorMessage(Response response, String expectedMessage){
         assertEquals(expectedMessage, response.asString(), "Response message doesn't equal expected message");
