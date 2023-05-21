@@ -7,6 +7,7 @@ import io.restassured.response.Response;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.hamcrest.Matchers.hasKey;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BaseTestCase {
@@ -24,6 +25,12 @@ public class BaseTestCase {
         JsonPath param = Response.jsonPath();
         assertTrue(param.getInt(paramName) > 0, "Doesn't have param with name: " + paramName);
         return param.getInt(paramName);
+    }
+    protected String getStringParamFromJson(Response response, String paramName){
+        response.then().assertThat().body("$",hasKey(paramName));
+        //assertTrue(param.getInt(paramName) > 0, "Doesn't have param with name: " + paramName);
+        JsonPath jsonPath = response.jsonPath();
+        return jsonPath.getString(paramName);
     }
     protected  String getEmptyParameter(String username, String firstName, String lastName, String email){
         if ( username.equals("") ){

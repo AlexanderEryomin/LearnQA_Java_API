@@ -29,4 +29,15 @@ public class ApiCoreRequests {
                 .get(url)
                 .andReturn();
     }
+    @Step("Make PUT-request for update user data")
+    public Response makePUTRequest(String url, Map<String, String> userData, String cookies, String token){
+        return given()
+                .filter(new AllureRestAssured())
+                .header(new Header("x-csrf-token", token))
+                .cookie("auth_sid",cookies)
+                .body(userData)
+                .when()
+                .put(url)
+                .andReturn();
+    }
 }

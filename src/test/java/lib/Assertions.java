@@ -26,4 +26,8 @@ public class Assertions {
     public static void assertResponseErrorMessage(Response response, String expectedMessage){
         assertEquals(expectedMessage, response.asString(), "Response message doesn't equal expected message");
     }
+    public static void assertResponseErrorMessageFromJson(Response response, String expectedMessage){
+        JsonPath jsonPath = response.jsonPath();
+        assertEquals(expectedMessage, jsonPath.getString("error"), "Response message doesn't equal expected message");
+    }
 }
