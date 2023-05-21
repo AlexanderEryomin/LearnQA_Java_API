@@ -14,7 +14,7 @@ public class Assertions {
         assertEquals(expectedValue, value, "JSON value doesn't equal expected value");
     }
     public static void assertResponseCode(Response response, int expectedCode){
-        assertEquals(expectedCode, response.getStatusCode(), "Code not" + expectedCode);
+        assertEquals(expectedCode, response.getStatusCode(), "Code not " + expectedCode);
     }
     public static void assertResponseWithKey(Response response, String expectedKey){
         response.then().assertThat().body("$",hasKey(expectedKey));
