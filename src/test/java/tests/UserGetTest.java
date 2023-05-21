@@ -1,12 +1,10 @@
 package tests;
 
 
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import lib.BaseTestCase;
 import org.junit.jupiter.api.Test;
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import lib.ApiCoreRequests;
 import lib.DataGenerator;
@@ -24,6 +22,8 @@ public class UserGetTest extends BaseTestCase {
     @Test
     @Description("Get data existing user successfully")
     @DisplayName("Test positive. Get data existing user")
+    @Owner(value = "Eryomin A. V.")
+    @Severity(value = SeverityLevel.CRITICAL)
     public void getUserData(){
         //Create user
         String testEmail = DataGenerator.getRandomEmail();

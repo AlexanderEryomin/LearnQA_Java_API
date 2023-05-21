@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import lib.BaseTestCase;
@@ -7,13 +8,16 @@ import org.junit.jupiter.api.Test;
 import lib.Assertions;
 import java.util.HashMap;
 import java.util.Map;
-
+@Epic("Users authorization cases")
+@Feature("User authorization")
 public class UserAuthTest extends BaseTestCase {
     String userCookie;
     String userHeader;
     int userId;
 
     @Test
+    @Owner(value = "Eryomin A. V.")
+    @Severity(value = SeverityLevel.BLOCKER)
     public void userAuth(){
         Map<String,String> param = new HashMap<>();
         param.put("email", "vinkotov@example.com");

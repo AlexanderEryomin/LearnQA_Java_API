@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import lib.Assertions;
@@ -13,9 +14,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 
 @Epic("Creating User cases")
@@ -26,6 +24,8 @@ public class UserRegisterTest extends BaseTestCase {
     @Test
     @Description("This test successfully create user")
     @DisplayName("Test positive create user")
+    @Owner(value = "Eryomin A. V.")
+    @Severity(value = SeverityLevel.BLOCKER)
     public void testCreateUserSuccess(){
         String userEmail = DataGenerator.getRandomEmail();
 
@@ -45,6 +45,8 @@ public class UserRegisterTest extends BaseTestCase {
     @Test
     @Description("")
     @DisplayName("Test negative. Create user with bad email")
+    @Owner(value = "Eryomin A. V.")
+    @Severity(value = SeverityLevel.NORMAL)
     public void testCreateUserWithBadEmail(){
 
         Map<String, String> userData = new HashMap<>();
@@ -72,6 +74,8 @@ public class UserRegisterTest extends BaseTestCase {
     })
     @Description("")
     @DisplayName("Test negative. Create user without one parameter")
+    @Owner(value = "Eryomin A. V.")
+    @Severity(value = SeverityLevel.NORMAL)
     public void testCreateUserWithOutOneParameter(String username, String firstName, String lastName, String email, String password){
 
         Map<String, String> userData = new HashMap<>();
@@ -92,6 +96,8 @@ public class UserRegisterTest extends BaseTestCase {
     @Test
     @Description("")
     @DisplayName("Test negative. Create user with shor name")
+    @Owner(value = "Eryomin A. V.")
+    @Severity(value = SeverityLevel.NORMAL)
     public void testCreateUserWithShortFirstName(){
         String userEmail = DataGenerator.getRandomEmail();
 
@@ -111,6 +117,8 @@ public class UserRegisterTest extends BaseTestCase {
     @Test
     @Description("")
     @DisplayName("Test negative. Create user with very long name")
+    @Owner(value = "Eryomin A. V.")
+    @Severity(value = SeverityLevel.NORMAL)
     public void testCreateUserWithLongFirstName(){
         String userEmail = DataGenerator.getRandomEmail();
 

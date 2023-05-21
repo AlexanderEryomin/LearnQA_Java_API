@@ -1,6 +1,6 @@
 package tests;
 
-import io.qameta.allure.Description;
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import lib.BaseTestCase;
 import lib.Assertions;
@@ -11,13 +11,16 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
-
+@Epic("Editing users cases")
+@Feature("Editing users")
 public class UserEditTest extends BaseTestCase {
     private ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
 
     @Test
     @Description("Editing user data without authorization")
     @DisplayName("Negative test. Editing user data without authorization")
+    @Owner(value = "Eryomin A. V.")
+    @Severity(value = SeverityLevel.CRITICAL)
     public void editUserDataWithOutAuth(){
         Integer userId = 1;
         Map<String, String> userData = new HashMap<>();
@@ -32,6 +35,8 @@ public class UserEditTest extends BaseTestCase {
     @Test
     @Description("Editing another user's data")
     @DisplayName("Negative test. Editing another user's data")
+    @Owner(value = "Eryomin A. V.")
+    @Severity(value = SeverityLevel.CRITICAL)
     public void editingAnotherUserData(){
 
         //Creating user
@@ -68,7 +73,7 @@ public class UserEditTest extends BaseTestCase {
         Response editingUserData = apiCoreRequests
                 .makePUTRequest("https://playground.learnqa.ru/api/user/" + userId, editUserData, cookies, token);
 
-        Assertions.assertResponseCode(editingUserData, 200); // // why response with status code 200 ???
+        Assertions.assertResponseCode(editingUserData, 200);
 
         //Check edited user
         Response editedUser = apiCoreRequests
@@ -79,6 +84,8 @@ public class UserEditTest extends BaseTestCase {
     @Test
     @Description("Editing email user on bad email")
     @DisplayName("Negative test. Editing email user on bad email")
+    @Owner(value = "Eryomin A. V.")
+    @Severity(value = SeverityLevel.NORMAL)
     public void editEmailUser(){
         String userEmail = DataGenerator.getRandomEmail();
         String userPassword = "12345";
@@ -117,6 +124,8 @@ public class UserEditTest extends BaseTestCase {
     @Test
     @Description("Editing firstName user on short firstName")
     @DisplayName("Negative test. Editing firstName user on short firstName")
+    @Owner(value = "Eryomin A. V.")
+    @Severity(value = SeverityLevel.MINOR)
     public void editFirstNameUser(){
         String userEmail = DataGenerator.getRandomEmail();
         String userPassword = "12345";

@@ -1,26 +1,26 @@
 package tests;
 
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import lib.BaseTestCase;
 import lib.Assertions;
 import lib.ApiCoreRequests;
 import lib.DataGenerator;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Description;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Epic("Delete users")
+@Epic("Delete users cases")
 @Feature("Delete users")
 public class UserDeleteTest extends BaseTestCase {
     private ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
     @Test
     @Description("Delete user with id 2")
     @DisplayName("Negative test. Delete user with id 2")
+    @Owner(value = "Eryomin A. V.")
+    @Severity(value = SeverityLevel.CRITICAL)
     public void deleteUserWithId(){
 
         //User authorization
@@ -48,6 +48,8 @@ public class UserDeleteTest extends BaseTestCase {
     @Test
     @Description("Delete user success")
     @DisplayName("Positive test. Delete user success")
+    @Owner(value = "Eryomin A. V.")
+    @Severity(value = SeverityLevel.CRITICAL)
     public void deleteUserPositive(){
 
         //Create user
@@ -91,6 +93,8 @@ public class UserDeleteTest extends BaseTestCase {
     @Test
     @Description("Delete another user")
     @DisplayName("Negative test. Delete another user")
+    @Owner(value = "Eryomin A. V.")
+    @Severity(value = SeverityLevel.CRITICAL)
     public void deleteUserNegative(){
 
         //Create first user
@@ -135,7 +139,7 @@ public class UserDeleteTest extends BaseTestCase {
         Response firstUserDelete = apiCoreRequests
                 .makeDeleteRequest("https://playground.learnqa.ru/api/user/" + userIdFirst, userCookies, userToken);
 
-        Assertions.assertResponseCode(firstUserDelete, 200); // why response with status code 200 ???
+        Assertions.assertResponseCode(firstUserDelete, 200);
 
         //Check first user
         Response userCheck = apiCoreRequests
