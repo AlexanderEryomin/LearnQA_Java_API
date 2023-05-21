@@ -5,6 +5,7 @@ import io.restassured.response.Response;
 
 import static org.hamcrest.Matchers.hasKey;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 
 public class Assertions {
@@ -29,5 +30,9 @@ public class Assertions {
     public static void assertResponseErrorMessageFromJson(Response response, String expectedMessage){
         JsonPath jsonPath = response.jsonPath();
         assertEquals(expectedMessage, jsonPath.getString("error"), "Response message doesn't equal expected message");
+    }
+    public static void assertNoTEqualValue(Response response, String expectedKey, String expectedValue){
+        JsonPath jsonPath = response.jsonPath();
+        assertNotEquals(expectedValue, jsonPath.getString(expectedKey));
     }
 }

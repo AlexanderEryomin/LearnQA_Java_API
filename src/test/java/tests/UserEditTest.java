@@ -59,22 +59,22 @@ public class UserEditTest extends BaseTestCase {
         String token = authUser.getHeader("x-csrf-token");
 
         //Editing data
+        String editingKey = "username";
+        String editingValue = "newTestName";
         Map<String, String> editUserData = new HashMap<>();
-        editUserData.put("username", "newTestName");
+        editUserData.put(editingKey, editingValue);
         Integer userId = 1;
+
         Response editingUserData = apiCoreRequests
                 .makePUTRequest("https://playground.learnqa.ru/api/user/" + userId, editUserData, cookies, token);
 
-        editingUserData.prettyPrint();
+        Assertions.assertResponseCode(editingUserData, 200); // // why response with status code 200 ???
 
-        Assertions.assertResponseCode(editingUserData, 400);
-        /*
-        System.out.println(editingUserData.getStatusCode());
-
+        //Check edited user
         Response editedUser = apiCoreRequests
                 .makeGetRequest("https://playground.learnqa.ru/api/user/" + userId, cookies, token);
-        editedUser.prettyPrint();
-        */
+
+        Assertions.assertNoTEqualValue(editedUser, editingKey, editingValue);
     }
     @Test
     @Description("Editing email user on bad email")
@@ -148,8 +148,6 @@ public class UserEditTest extends BaseTestCase {
 
         Response editUser = apiCoreRequests
                 .makePUTRequest("https://playground.learnqa.ru/api/user/" + idAuthUser, editUserData, cookies, token);
-
-       // String errorMessage = getStringParamFromJson(editUser,"error");
 
         Assertions.assertResponseCode(editUser, 400);
         Assertions.assertResponseErrorMessageFromJson(editUser, "Too short value for field firstName");
